@@ -1,4 +1,8 @@
 lib-java-android
 ================
 
-Java-Android library to integrate Rocketbox
+Android library to integrate Rocketbox
+
+<br/>
+<a href="https://rocketbox.io/docs">How to use</a>
+<br/><br/>
