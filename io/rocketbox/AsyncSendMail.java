@@ -21,6 +21,15 @@ import android.os.AsyncTask;
 public class AsyncSendMail extends AsyncTask<String, Void, JSONObject> {
 
 	private RocketboxListener listener;
+	private List<NameValuePair> values;
+
+	public List<NameValuePair> getValues() {
+		return values;
+	}
+
+	public void setValues(List<NameValuePair> value) {
+		this.values = value;
+	}
 
 	public RocketboxListener getListener() {
 		return listener;
@@ -49,10 +58,13 @@ public class AsyncSendMail extends AsyncTask<String, Void, JSONObject> {
 			conn.setDoOutput(true);
 
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-			parameters.add(new BasicNameValuePair("to", params[1]));
-			parameters.add(new BasicNameValuePair("subject", params[2]));
-			parameters.add(new BasicNameValuePair("body", params[3]));
 			parameters.add(new BasicNameValuePair("token", Rocketbox.token));
+
+			JSONObject json_value = new JSONObject();
+			for (NameValuePair nameValuePair : values) {
+				json_value.put(nameValuePair.getName(), nameValuePair.getValue());
+			}
+			parameters.add(new BasicNameValuePair("value", json_value.toString()));
 
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(

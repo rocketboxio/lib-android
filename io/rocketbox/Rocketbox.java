@@ -120,11 +120,12 @@ public class Rocketbox {
 		asyn.execute("collection/drop", key);
 	}
 	
-	public void SendMail(String to, String subject, String body, RocketboxListener listener) {
+	public void SendMail(List<NameValuePair> parameters, RocketboxListener listener) {
 		if (!isTokenValid()){ return; }
 		AsyncSendMail asyn = new AsyncSendMail();
 		asyn.setListener(listener);
-		asyn.execute("mail/send", to, subject, body);
+		asyn.setValues(parameters);
+		asyn.execute("mail/send");
 	}
 
 }
