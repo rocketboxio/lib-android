@@ -20,8 +20,8 @@ public class Rocketbox {
 		}
 		return instance;
 	}
-	
-	private Boolean isTokenValid(){
+
+	private Boolean isTokenValid() {
 		if (Rocketbox.token != null) {
 			return true;
 		} else {
@@ -31,28 +31,36 @@ public class Rocketbox {
 	}
 
 	public void get(String key, RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncGetValue asyn = new AsyncGetValue();
 		asyn.setListener(listener);
 		asyn.execute("get", key);
 	}
 
 	public void set(String key, String value, RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncSetValue asyn = new AsyncSetValue();
 		asyn.setListener(listener);
 		asyn.execute("set", key, value);
 	}
 
 	public void delete(String key, RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncDeleteValue asyn = new AsyncDeleteValue();
 		asyn.setListener(listener);
 		asyn.execute("delete", key);
 	}
 
 	public void getAll(RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncGetAllValue asyn = new AsyncGetAllValue();
 		asyn.setListener(listener);
 		asyn.execute("getAll");
@@ -60,7 +68,9 @@ public class Rocketbox {
 
 	public void CollectionAdd(String key, List<NameValuePair> parameters,
 			RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncCollectionAdd asyn = new AsyncCollectionAdd();
 		asyn.setListener(listener);
 		asyn.setValues(parameters);
@@ -69,7 +79,9 @@ public class Rocketbox {
 
 	public void CollectionEdit(String key, List<NameValuePair> parameters,
 			RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncCollectionEdit asyn = new AsyncCollectionEdit();
 		asyn.setListener(listener);
 		asyn.setValues(parameters);
@@ -77,21 +89,27 @@ public class Rocketbox {
 	}
 
 	public void CollectionGet(String key, RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncCollectionGet asyn = new AsyncCollectionGet();
 		asyn.setListener(listener);
 		asyn.execute("collection/get", key);
 	}
 
 	public void CollectionGetAll(RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncCollectionGetAll asyn = new AsyncCollectionGetAll();
 		asyn.setListener(listener);
 		asyn.execute("collection/getAll");
 	}
 
 	public void CollectionDelete(String id, RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncCollectionDelete asyn = new AsyncCollectionDelete();
 		asyn.setListener(listener);
 		asyn.execute("collection/delete", id);
@@ -99,7 +117,9 @@ public class Rocketbox {
 
 	public void CollectionSearch(String key, List<NameValuePair> parameters,
 			RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncCollectionSearch asyn = new AsyncCollectionSearch();
 		asyn.setListener(listener);
 		asyn.setValues(parameters);
@@ -107,25 +127,39 @@ public class Rocketbox {
 	}
 
 	public void CollectionSearchById(String id, RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncCollectionSearchById asyn = new AsyncCollectionSearchById();
 		asyn.setListener(listener);
 		asyn.execute("collection/searchById", id);
 	}
 
 	public void CollectionDrop(String key, RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncCollectionDrop asyn = new AsyncCollectionDrop();
 		asyn.setListener(listener);
 		asyn.execute("collection/drop", key);
 	}
-	
+
 	public void SendMail(List<NameValuePair> parameters, RocketboxListener listener) {
-		if (!isTokenValid()){ return; }
+		if (!isTokenValid()) {
+			return;
+		}
 		AsyncSendMail asyn = new AsyncSendMail();
 		asyn.setListener(listener);
 		asyn.setValues(parameters);
 		asyn.execute("mail/send");
+	}
+
+	public void UploadFile(String file, RocketboxListenerUpload listener) {
+		if (!isTokenValid()) {
+			return;
+		}
+		RocketboxHttpUpload http = new RocketboxHttpUpload(file, listener);
+		http.execute("uploadFile");
 	}
 
 }

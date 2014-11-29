@@ -62,9 +62,11 @@ public class AsyncSendMail extends AsyncTask<String, Void, JSONObject> {
 
 			JSONObject json_value = new JSONObject();
 			for (NameValuePair nameValuePair : values) {
-				json_value.put(nameValuePair.getName(), nameValuePair.getValue());
+				json_value.put(nameValuePair.getName(),
+						nameValuePair.getValue());
 			}
-			parameters.add(new BasicNameValuePair("value", json_value.toString()));
+			parameters.add(new BasicNameValuePair("value", json_value
+					.toString()));
 
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
@@ -75,11 +77,11 @@ public class AsyncSendMail extends AsyncTask<String, Void, JSONObject> {
 			os.close();
 
 			conn.connect();
-			
+
 			InputStreamReader in = new InputStreamReader(conn.getInputStream());
 			String json = getResponseText(in);
 			return new JSONObject(json);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
