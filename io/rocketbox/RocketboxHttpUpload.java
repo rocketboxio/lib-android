@@ -29,14 +29,22 @@ import android.util.Log;
 public class RocketboxHttpUpload extends AsyncTask<String, Integer, JSONObject> {
 
 	private String filePath;
+	private String fileName;
 	private HttpClient client;
 	private long totalSize;
 	private RocketboxListenerUpload listener;
 
-	public RocketboxHttpUpload(String filePath, RocketboxListenerUpload listener) {
+	public RocketboxHttpUpload(String filePath, String fileName, RocketboxListenerUpload listener) {
 		super();
 		this.filePath = filePath;
 		this.listener = listener;
+		if (fileName == null){
+			this.fileName = "";
+		}
+		else{
+			this.fileName = fileName;		
+		}
+		
 	}
 
 	@Override
@@ -74,6 +82,7 @@ public class RocketboxHttpUpload extends AsyncTask<String, Integer, JSONObject> 
 			ContentBody cbFile = new FileBody(file, getMimeType(filePath));
 			entity.addPart("file", cbFile);
 			entity.addPart("token", new StringBody(Rocketbox.token));
+			entity.addPart("fileName", new StringBody(this.fileName));
 			totalSize = entity.getContentLength();
 			post.setEntity(entity);
 			HttpResponse response = client.execute(post);

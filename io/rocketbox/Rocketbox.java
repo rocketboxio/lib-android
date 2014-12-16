@@ -154,11 +154,11 @@ public class Rocketbox {
 		asyn.execute("mail/send");
 	}
 
-	public void UploadFile(String file, RocketboxListenerUpload listener) {
+	public void UploadFile(String file, String fileName, RocketboxListenerUpload listener) {
 		if (!isTokenValid()) {
 			return;
 		}
-		RocketboxHttpUpload http = new RocketboxHttpUpload(file, listener);
+		RocketboxHttpUpload http = new RocketboxHttpUpload(file, fileName, listener);
 		http.execute("uploadFile");
 	}
 
