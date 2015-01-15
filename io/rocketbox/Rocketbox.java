@@ -8,7 +8,7 @@ public class Rocketbox {
 
 	private static Rocketbox instance;
 	protected static String token = null;
-	protected static String api_path = "https://www.rocketbox.io/api/v1/";
+	protected static String api_path = "https://rocketbox.io/api/v1/";
 
 	public void setToken(String token) {
 		Rocketbox.token = token;
